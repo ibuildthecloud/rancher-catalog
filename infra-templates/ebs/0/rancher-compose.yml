@@ -17,4 +17,4 @@ ebs-driver:
   storage_driver:
     name: rancher-ebs
     scope: environment
-    volumeAccessMode: singleHostRW
+    volume_access_mode: singleHostRW
