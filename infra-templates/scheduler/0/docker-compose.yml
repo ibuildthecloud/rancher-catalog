@@ -4,3 +4,7 @@ scheduler:
     labels:
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent_service.scheduling: "true"
+    log_driver: json-file
+    log_opts:
+        max-size: 25m
+        max-file: 2
