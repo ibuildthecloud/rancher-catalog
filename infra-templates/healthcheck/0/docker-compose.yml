@@ -3,3 +3,7 @@ healthcheck:
     io.rancher.container.create_agent: 'true'
     io.rancher.scheduler.global: 'true'
   image: rancher/healthcheck:v0.1.0
+  log_driver: json-file
+  log_opts:
+    max-size: 25m
+    max-file: 2

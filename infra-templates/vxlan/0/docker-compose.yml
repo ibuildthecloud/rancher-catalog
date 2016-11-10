@@ -16,6 +16,11 @@ services:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.vxlan: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
   cni-driver:
     privileged: true
     image: rancher/net:v0.7.0
@@ -25,3 +30,8 @@ services:
     labels:
       io.rancher.network.cni.binary: 'rancher-bridge'
       io.rancher.container.dns: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
