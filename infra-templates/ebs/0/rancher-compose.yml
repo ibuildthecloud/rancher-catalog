@@ -13,3 +13,8 @@
     label: AWS Access Key
     type: "password"
     description: Optional if using IAM Profile
+ebs-driver:
+  storage_driver:
+    name: rancher-ebs
+    scope: environment
+    volumeAccessMode: singleHostRW

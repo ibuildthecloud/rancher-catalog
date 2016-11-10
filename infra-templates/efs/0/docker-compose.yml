@@ -14,7 +14,3 @@ efs-driver:
   - /run:/run
   - /dev:/host/dev
   - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
-  storage_driver:
-      name: rancher-efs
-      scope: environment
-      volumeAccessMode: multiHostRW
