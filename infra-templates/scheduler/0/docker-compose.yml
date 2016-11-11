@@ -1,10 +1,13 @@
-scheduler:
+version: '2'
+services:
+  scheduler:
     image: rancher/scheduler:v0.1.2
     command: scheduler
     labels:
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent_service.scheduling: "true"
-    log_driver: json-file
-    log_opts:
+    logging:
+      driver: json-file
+      options:
         max-size: 25m
-        max-file: 2
+        max-file: '2'
