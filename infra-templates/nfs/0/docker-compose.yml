@@ -21,7 +21,3 @@ services:
       options:
         max-size: 25m
         max-file: '2'
-    storage_driver:
-      name: rancher-nfs
-      scope: environment
-      volume_access_mode: multiHostRW
