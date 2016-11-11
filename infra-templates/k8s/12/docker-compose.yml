@@ -16,12 +16,15 @@ kubelet:
         - --cluster-dns=169.254.169.250
         - --cluster-domain=cluster.local
         - --network-plugin=cni
-        - --network-plugin-dir=/etc/cni/net.d
-    image: rancher/k8s:v1.4.4-rancher2
+        - --network-plugin-dir=/etc/cni/default.d
+    image: rancher/k8s:v1.4.5-rancher2
     volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - /var/run:/host/var/run
+        - /run:/run
+        - /var/run:/var/run
         - /var/lib/docker:/var/lib/docker
+        - /var/lib/kubelet:/var/lib/kubelet:shared
+        - rancher-cni-driver:/etc/cni:ro
+        - rancher-cni-driver:/opt/cni:ro
         - /dev:/host/dev
     net: host
     pid: host
@@ -41,7 +44,7 @@ proxy:
         - --v=2
         - --healthz-bind-address=0.0.0.0
         - --proxy-mode=userspace
-    image: rancher/k8s:v1.4.4-rancher2
+    image: rancher/k8s:v1.4.5-rancher2
     privileged: true
     net: host
     links:
@@ -94,7 +97,7 @@ kubernetes:
         - --runtime-config=batch/v2alpha1
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
-    image: rancher/k8s:v1.4.4-rancher2
+    image: rancher/k8s:v1.4.5-rancher2
     links:
         - etcd
 
@@ -124,7 +127,7 @@ scheduler:
         - kube-scheduler
         - --master=http://kubernetes.kubernetes.rancher.internal
         - --address=0.0.0.0
-    image: rancher/k8s:v1.4.4-rancher2
+    image: rancher/k8s:v1.4.5-rancher2
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
     links:
@@ -139,7 +142,7 @@ controller-manager:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.4.4-rancher2
+    image: rancher/k8s:v1.4.5-rancher2
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.container.create_agent: "true"
