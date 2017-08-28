@@ -28,9 +28,8 @@ services:
   metadata:
     cap_add:
     - NET_ADMIN
-    image: rancher/metadata:v0.9.3
+    image: rancher/metadata:dev
     network_mode: bridge
-    command: start.sh rancher-metadata -subscribe
     labels:
       io.rancher.sidekicks: dns
       io.rancher.container.create_agent: 'true'
