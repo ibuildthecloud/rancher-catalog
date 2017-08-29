@@ -17,10 +17,11 @@ services:
   router:
     cap_add:
       - NET_ADMIN
-    image: rancher/net:v0.11.7
+    image: ibuildthecloud/net:23c844d
     network_mode: container:ipsec
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
+      TOKEN_PSK: 'true'
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.ipsec: 'true'
